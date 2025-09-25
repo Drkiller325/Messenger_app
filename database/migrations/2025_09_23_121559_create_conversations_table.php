@@ -19,6 +19,7 @@ return new class extends Migration
                 ->constrained()
                 ->nullOnDelete();
             $table->string('label')->nullable();
+            $table->enum('type', ['peer', 'group'])->default('peer');
             $table->timestamps();
         });
     }

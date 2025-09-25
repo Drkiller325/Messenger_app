@@ -14,7 +14,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Conversation::class)->constrained()->cascadeOnDelete();
             $table->enum('role', ['admin', 'participant'])->default('participant');
