@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Conversation::class, 'participants')
             ->latest('last_message_id')
             ->withPivot([
-                'role', 'joined_at', 'last_message_id'
+                'role', 'joined_at'
             ]);
     }
 
@@ -68,9 +68,5 @@ class User extends Authenticatable
             ]);
     }
 
-    public function lastMessage()
-    {
-        return $this->belongsTo(Message::class, 'last_message_id', 'id')
-            ->withDefault();
-    }
+
 }

@@ -31,4 +31,10 @@ class Conversation extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function lastMessage()
+    {
+        return $this->belongsTo(Message::class, 'last_message_id', 'id')
+            ->withDefault();
+    }
+
 }
