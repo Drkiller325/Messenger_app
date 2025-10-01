@@ -4,7 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{id?}', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/{id?}', [HomeController::class, 'index'])->middleware('auth')->name('messenger');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

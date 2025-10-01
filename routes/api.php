@@ -9,7 +9,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-//Route::group(['middleware' => ['auth:sanctum']], function () {
+// sanctum works with tokens not cookies
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('conversations', [ConversationsController::class, 'index']);
     Route::get('conversations/{conversation}', [ConversationsController::class, 'show']);
@@ -17,8 +18,9 @@ Route::get('/user', function (Request $request) {
     Route::delete('conversations/{conversation}/participants', [ConversationsController::class, 'removeParicipant']);
 
     Route::get('conversations/{id}/messages', [MessagesController::class, 'index']);
-    Route::post('messages', [MessagesController::class, 'store']);
+    Route::post('messages', [MessagesController::class, 'store'])
+        ->name('api.messages.store');
     Route::delete('messages/{id}', [MessagesController::class, 'destroy']);
 
 
-//});
+});

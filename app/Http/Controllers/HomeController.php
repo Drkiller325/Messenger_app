@@ -25,15 +25,17 @@ class HomeController extends Controller
 
         // to load the messages in the chat
         $messages = [];
+        $activeChat = null;
         if($id)
         {
-            $chat = $chats->where('id', $id)->first();
-            $messages = $chat->messages()->with('user')->paginate();
+            $activeChat = $chats->where('id', $id)->first();
+            $messages = $activeChat->messages()->with('user')->paginate();
         }
 
         return view('messenger' , [
             'friends' => $friends,
             'chats' => $chats,
+            'activeChat' => $activeChat,
             'messages' => $messages
         ]);
     }
