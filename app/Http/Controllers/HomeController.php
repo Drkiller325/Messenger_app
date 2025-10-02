@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conversation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class HomeController extends Controller
 
         // to load the messages in the chat
         $messages = [];
-        $activeChat = null;
+        $activeChat = new Conversation();
         if($id)
         {
             $activeChat = $chats->where('id', $id)->first();

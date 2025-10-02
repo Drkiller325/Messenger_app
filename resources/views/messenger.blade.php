@@ -2888,6 +2888,24 @@
 <script src="{{ asset('assets/js/template.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="{{ asset('assets/js/messenger.js') }}"></script>
+<script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+<script>
+    const userId = '{{ Auth::id() }}';
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('13047e63db8e5299e9a2', {
+        cluster: 'eu',
+        authEndpoint: "/broadcasting/auth",
+    });
+
+    // subscribe for public channel,
+    var channel = pusher.subscribe(`presence-Messenger.${userId}`);
+    channel.bind('new-message', function(data) {
+        addMessage(data.message.body);
+    });
+
+</script>
 
 </body>
 </html>
