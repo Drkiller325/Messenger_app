@@ -5,12 +5,12 @@ $('.chat-form').on('submit', function (e) {
     $.post($(this).attr('action'), $(this).serialize(), function (response) {
 
     });
-    addMessage(msg);
+    addMessage(msg, 'message-out');
     $(this).find('textarea').val('');
 })
 
-const addMessage = function (msg) {
-    $('#chat-body').append(`<div class="message message-out">
+const addMessage = function (msg, c= '') {
+    $('#chat-body').append(`<div class="message ${c}">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modal-profile" class="avatar avatar-responsive">
                                         <img class="avatar-img" src="" alt="">
                                     </a>

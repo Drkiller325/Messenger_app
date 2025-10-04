@@ -30,7 +30,7 @@ class HomeController extends Controller
         if($id)
         {
             $activeChat = $chats->where('id', $id)->first();
-            $messages = $activeChat->messages()->with('user')->paginate();
+            $messages = $activeChat->messages()->with('user')->get();
         }
 
         return view('messenger' , [

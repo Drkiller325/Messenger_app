@@ -2899,8 +2899,9 @@
         authEndpoint: "/broadcasting/auth",
     });
 
-    // subscribe for public channel,
+    // subscribe for the public channel,
     var channel = pusher.subscribe(`presence-Messenger.${userId}`);
+
     channel.bind('new-message', function(data) {
         addMessage(data.message.body);
     });
