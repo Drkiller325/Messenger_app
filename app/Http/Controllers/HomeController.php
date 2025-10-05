@@ -17,27 +17,9 @@ class HomeController extends Controller
             ->orderBy('name')
             ->paginate();
 
-        $chats = $user->conversations()->with([
-            'lastMessage',
-            'participants' => function ($builder) use ($user) {
-                $builder->where('id', '<>', $user->id);
-            }
-        ])->get();
-
-        // to load the messages in the chat
-        $messages = [];
-        $activeChat = new Conversation();
-        if($id)
-        {
-            $activeChat = $chats->where('id', $id)->first();
-            $messages = $activeChat->messages()->with('user')->get();
-        }
 
         return view('messenger' , [
             'friends' => $friends,
-            'chats' => $chats,
-            'activeChat' => $activeChat,
-            'messages' => $messages
         ]);
     }
 }
